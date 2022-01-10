@@ -61,23 +61,20 @@
 	</body>
 
 	<script>
-		if (sessionStorage.getItem("mode") != "light" || sessionStorage.getItem("mode") != "dark") {
-			sessionStorage.setItem("mode", "light");
-		}
     
     updateDarkModeClass();
 
     function toggleDarkMode() {
-      if(sessionStorage.getItem("mode") == "dark") {
-        sessionStorage.setItem("mode", "light");
+      if(localStorage.getItem("order-summary-component-main-mode") == "dark") {
+        localStorage.setItem("order-summary-component-main-mode", "light");
       } else {
-        sessionStorage.setItem("mode", "dark");
+        localStorage.setItem("order-summary-component-main-mode", "dark");
       }
       updateDarkModeClass();
     }
 
     function updateDarkModeClass() {
-      if(sessionStorage.getItem("mode") == "dark") {
+      if(localStorage.getItem("order-summary-component-main-mode") == "dark") {
         document.getElementById("body").className = "body dark";
       } else {
         document.getElementById("body").className = "body";
