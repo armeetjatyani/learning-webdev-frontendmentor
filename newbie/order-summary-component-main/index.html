@@ -61,23 +61,23 @@
 	</body>
 
 	<script>
-		if (localStorage.getItem("mode") != "light" || localStorage.getItem("mode") != "dark") {
-			localStorage.setItem("mode", "light");
+		if (sessionStorage.getItem("mode") != "light" || sessionStorage.getItem("mode") != "dark") {
+			sessionStorage.setItem("mode", "light");
 		}
     
     updateDarkModeClass();
 
     function toggleDarkMode() {
-      if(localStorage.getItem("mode") == "dark") {
-        localStorage.setItem("mode", "light");
+      if(sessionStorage.getItem("mode") == "dark") {
+        sessionStorage.setItem("mode", "light");
       } else {
-        localStorage.setItem("mode", "dark");
+        sessionStorage.setItem("mode", "dark");
       }
       updateDarkModeClass();
     }
 
     function updateDarkModeClass() {
-      if(localStorage.getItem("mode") == "dark") {
+      if(sessionStorage.getItem("mode") == "dark") {
         document.getElementById("body").className = "body dark";
       } else {
         document.getElementById("body").className = "body";
