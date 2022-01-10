@@ -9,34 +9,80 @@
 		<link rel="stylesheet" href="tailwindstyles.css" />
 		<title>Frontend Mentor | Order summary card</title>
 	</head>
-	<body>
-		<div class="bg-blue-200 w-full h-screen flex items-center justify-center">
-			<div class="bg-white shadow-xl flex flex-col w-[350px] h-[500px] rounded-3xl overflow-hidden shadow-blue-400/40">
+	<body id="body">
+		<div class="bg-blue-200 w-full h-screen flex flex-col items-center justify-center dark:bg-gray-900">
+			<div class="bg-white dark:bg-gray-800 shadow-xl flex flex-col w-[350px] h-[500px] rounded-3xl overflow-hidden shadow-blue-600/60">
 				<div class="h-[40%]">
 					<img class="object-cover h-full hover:scale-110 transition-all duration-200" src="./images/illustration-hero.svg" alt="" srcset="" />
 				</div>
 				<div class="h-[60%] w-full flex flex-col items-center">
 					<div class="h-[40%] flex flex-col items-center justify-center">
-						<h1 class="font-bold text-xl">Order Summary</h1>
-						<p class="font-semibold text-gray-600 text-sm mx-10 text-center mt-3">You can now listen to millions of songs, audiobooks, and podcasts on any device anywhere you like!</p>
+						<h1 class="font-bold text-xl dark:text-white">Order Summary</h1>
+						<p class="font-semibold text-gray-600 dark:text-gray-300 text-sm mx-10 text-center mt-3">You can now listen to millions of songs, audiobooks, and podcasts on any device anywhere you like!</p>
 					</div>
 					<div class="h-[20%] w-full flex justify-center">
-						<div class="flex justify-between items-center w-[80%] bg-gray-50 p-3 rounded-2xl group hover:scale-105 transition-all duration-200">
+						<div class="flex justify-between items-center w-[80%] bg-gray-50 dark:bg-gray-700 p-3 rounded-2xl group hover:scale-105 transition-all duration-200">
 							<img class="group-hover:rotate-12 transition-all duration-200" src="./images/icon-music.svg" alt="" srcset="" />
 							<div class="w-[50%]">
-								<p class="text-sm"><strong>Annual Plan</strong></p>
-								<p class="text-sm">$59.99/year</p>
+								<p class="text-sm dark:text-white"><strong>Annual Plan</strong></p>
+								<p class="text-sm dark:text-white">$59.99/year</p>
 							</div>
-							<a class="underline text-blue-700 font-semibold text-xs hover:scale-105 transition-all duration-200" href="#change">Change</a>
+							<a class="underline text-blue-700 dark:text-blue-400 font-semibold text-xs hover:scale-105 transition-all duration-200" href="#change">Change</a>
 						</div>
 					</div>
 					<div class="h-[40%] w-full flex flex-col justify-center items-center space-y-2">
 						<a class="w-4/5 bg-blue-600 text-white font-semibold text-center text-sm py-2 rounded-2xl shadow-blue-600/50 shadow-lg hover:scale-105 transition-all duration-200" href="#pay">Proceed to Payment</a>
-						<a class="w-4/5 text-gray-600 font-semibold text-sm text-center rounded-2xl hover:shadow-lg py-2 hover:scale-105 transition-all duration-200" href="#cancelorder">Cancel Order</a>
+						<a class="w-4/5 text-gray-600 dark:text-gray-300 font-semibold text-sm text-center rounded-2xl hover:shadow-lg py-2 hover:scale-105 transition-all duration-200" href="#cancelorder">Cancel Order</a>
 					</div>
 				</div>
 			</div>
+
+      <div class="relative">
+        <button id="lightModeButton" class="mt-10 p-2 bg-gray-800 text-white dark:flex hidden items-center justify-center rounded-xl shadow-xl hover:scale-125 hover:rotate-12 transition-all duration-200" onclick="toggleDarkMode()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+  
+        <button id="darkModeButton" class="mt-10 p-2 bg-white text-black dark:hidden flex items-center justify-center rounded-xl shadow-xl hover:scale-125 hover:rotate-12 transition-all duration-200" onclick="toggleDarkMode()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+      </div>
 		</div>
-		<div class="attribution" hidden>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#">Your Name Here</a>.</div>
+		<div class="attribution" hidden>Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. Coded by <a href="#">Armeet Jatyani</a>.</div>
 	</body>
+
+	<script>
+		if (localStorage.getItem("mode") != "light" || localStorage.getItem("mode") != "dark") {
+			localStorage.setItem("mode", "light");
+		}
+    
+    updateDarkModeClass();
+
+    function toggleDarkMode() {
+      if(localStorage.getItem("mode") == "dark") {
+        localStorage.setItem("mode", "light");
+      } else {
+        localStorage.setItem("mode", "dark");
+      }
+      updateDarkModeClass();
+    }
+
+    function updateDarkModeClass() {
+      if(localStorage.getItem("mode") == "dark") {
+        document.getElementById("body").className = "body dark";
+      } else {
+        document.getElementById("body").className = "body";
+      }
+    }
+
+	</script>
 </html>
